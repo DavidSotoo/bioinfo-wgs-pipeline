@@ -1,0 +1,8 @@
+name: wgs-reporting
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - pysam>=0.22

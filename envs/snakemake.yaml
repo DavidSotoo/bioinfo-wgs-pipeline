@@ -1,0 +1,11 @@
+name: wgs-pipeline
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - snakemake-minimal>=8
+  - graphviz
+  - mamba
+  - pyyaml

@@ -1,7 +1,7 @@
 import csv
 from collections import defaultdict
 
-configfile: "config/config.yaml"
+configfile: "../config/config.yaml"
 
 
 def read_tsv(path):
@@ -54,8 +54,8 @@ rule all:
         "results/reports/variant_summary.tsv",
         "results/dag/dag.png"
 
-include: "workflow/rules/qc.smk"
-include: "workflow/rules/trimming.smk"
-include: "workflow/rules/alignment.smk"
-include: "workflow/rules/variant_calling.smk"
-include: "workflow/rules/filtering.smk"
+include: "rules/qc.smk"
+include: "rules/trimming.smk"
+include: "rules/alignment.smk"
+include: "rules/variant_calling.smk"
+include: "rules/filtering.smk"

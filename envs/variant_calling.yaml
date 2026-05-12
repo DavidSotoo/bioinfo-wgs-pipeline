@@ -1,0 +1,8 @@
+name: wgs-variant-calling
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bcftools>=1.19
+  - htslib>=1.19

@@ -1,0 +1,25 @@
+samples_tsv: samples.tsv
+units_tsv: units.tsv
+
+genome_name: mini_reference
+reference: resources/genome.fasta
+
+threads:
+  fastqc: 1
+  trimming: 2
+  alignment: 2
+  samtools: 1
+  variant_calling: 2
+
+trimming:
+  qualified_quality_phred: 15
+  length_required: 20
+  detect_adapter_for_pe: true
+
+variant_calling:
+  min_base_quality: 10
+  ploidy: 2
+
+filtering:
+  min_qual: 10
+  min_depth: 2

@@ -1,3 +1,11 @@
 .snakemake/
-results/
-data/
+results/*
+!results/.gitkeep
+*.pyc
+__pycache__/
+.conda/
+.mamba/
+.DS_Store
+*.log
+data/messy_names/fastqs/*.fastq.gz
+fastq/*.fq.gz
