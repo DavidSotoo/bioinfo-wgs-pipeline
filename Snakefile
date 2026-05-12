@@ -38,3 +38,15 @@ rule bwa_map:
         "results/bam/{sample}.bam"
     shell:
         "bwa mem {input.genome} {input.r1} {input.r2} | samtools view -Sb - > {output}"
+
+
+rule mark_duplicates:
+    input:
+        "results/bam/{sample}.bam"
+    output:
+        "results/mkdup/{sample}.bam",
+        "results/qc/mkdup/{sample}.metrics"
+    log:
+        "results/logs/mkdup/{sample}.log"
+    shell:
+        "picard MarkDuplicates I={input} O={output[0]} M={output[1]} TAGGING_POLICY=All CREATE_INDEX=true > {log} 2>&1"
