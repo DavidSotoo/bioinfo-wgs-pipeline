@@ -161,43 +161,6 @@ results/logs/                           Logs
 results/benchmarks/                     Benchmarks
 ```
 
-## Git
-
-Inicialización:
-
-```bash
-git init
-git checkout -b main
-git add README.md .gitignore setup.sh samples.tsv units.tsv config envs scripts resources workflow Snakefile
-git commit -m "chore: initialize reproducible WGS pipeline"
-```
-
-Commits progresivos recomendados:
-
-```bash
-git checkout -b feat/non-model-data-layout
-git add samples.tsv units.tsv scripts/create_test_fastqs.sh
-git commit -m "feat: add non-model WGS sample and unit layout"
-
-git checkout -b feat/qc-trimming
-git add workflow/rules/qc.smk workflow/rules/trimming.smk envs/qc.yaml envs/trimming.yaml
-git commit -m "feat: add FastQC quality control and fastp trimming by unit"
-
-git checkout -b feat/alignment
-git add workflow/rules/alignment.smk envs/alignment.yaml
-git commit -m "feat: align units and merge BAMs by sample"
-
-git checkout -b feat/variants
-git add workflow/rules/variant_calling.smk workflow/rules/filtering.smk scripts/summarize_variants.py
-git commit -m "feat: add cohort variant calling and filtering"
-
-git checkout -b docs/execution
-git add README.md setup.sh
-git commit -m "docs: document execution DAG outputs and troubleshooting"
-```
-
-Si Git marca `dubious ownership`:
-
 ```bash
 git config --global --add safe.directory "$(pwd)"
 ```
