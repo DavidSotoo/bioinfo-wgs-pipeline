@@ -79,11 +79,34 @@ rule merge_sample_bams:
         samtools merge -@ {threads} -f {output} {input} > {log} 2>&1
         """
 
-rule index_bam:
+rule mark_duplicates:
     input:
         "results/alignment/samples/{sample}.sorted.bam"
     output:
-        "results/alignment/samples/{sample}.sorted.bam.bai"
+        bam="results/alignment/samples/{sample}.dedup.bam",
+        metrics="results/alignment/samples/{sample}.dedup.metrics.txt"
+    log:
+        "results/logs/picard/mark_duplicates_{sample}.log"
+    benchmark:
+        "results/benchmarks/picard/mark_duplicates_{sample}.txt"
+    conda:
+        "../../envs/picard.yaml"
+    shell:
+        """
+        mkdir -p results/logs/picard results/benchmarks/picard
+        picard MarkDuplicates \
+            I={input} \
+            O={output.bam} \
+            M={output.metrics} \
+            REMOVE_DUPLICATES=false \
+            > {log} 2>&1
+        """
+
+rule index_bam:
+    input:
+        "results/alignment/samples/{sample}.dedup.bam"
+    output:
+        "results/alignment/samples/{sample}.dedup.bam.bai"
     log:
         "results/logs/alignment/samples/{sample}.index.log"
     benchmark:
@@ -98,8 +121,8 @@ rule index_bam:
 
 rule samtools_stats:
     input:
-        bam="results/alignment/samples/{sample}.sorted.bam",
-        bai="results/alignment/samples/{sample}.sorted.bam.bai"
+        bam="results/alignment/samples/{sample}.dedup.bam",
+        bai="results/alignment/samples/{sample}.dedup.bam.bai"
     output:
         "results/alignment/stats/{sample}.samtools.stats.txt"
     log:

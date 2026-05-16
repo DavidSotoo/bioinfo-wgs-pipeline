@@ -2,8 +2,8 @@ rule call_variants:
     input:
         ref=REF,
         fai=rules.samtools_faidx.output,
-        bams=expand("results/alignment/samples/{sample}.sorted.bam", sample=SAMPLES),
-        bais=expand("results/alignment/samples/{sample}.sorted.bam.bai", sample=SAMPLES)
+        bams=expand("results/alignment/samples/{sample}.dedup.bam", sample=SAMPLES),
+        bais=expand("results/alignment/samples/{sample}.dedup.bam.bai", sample=SAMPLES)
     output:
         vcf="results/variants/cohort.raw.vcf.gz",
         tbi="results/variants/cohort.raw.vcf.gz.tbi"
